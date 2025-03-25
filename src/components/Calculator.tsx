@@ -20,6 +20,14 @@ interface PaellaSelection {
   portions: string;
 }
 
+interface PriceDetails {
+  pricePerPerson: number;
+  seafoodSurchargePerPortion: number;
+  seafoodExtras: { id: string; price: number }[];
+  extras: { id: string; price: number }[];
+  totalPrice: number;
+}
+
 interface Order {
   guests: number;
   package: string;
@@ -36,6 +44,7 @@ interface Order {
   timeSlot: string;
   requestCustomQuote: boolean;
   comments: string;
+  priceDetails: PriceDetails;
 }
 
 const TIME_SLOTS = [
@@ -127,6 +136,13 @@ const Calculator: React.FC = () => {
     timeSlot: '',
     requestCustomQuote: false,
     comments: '',
+    priceDetails: {
+      pricePerPerson: 0,
+      seafoodSurchargePerPortion: 0,
+      seafoodExtras: [],
+      extras: [],
+      totalPrice: 0,
+    },
   });
 
   const [hasInteracted, setHasInteracted] = useState(false);
@@ -142,6 +158,16 @@ const Calculator: React.FC = () => {
   useEffect(() => {
     if (order.guests >= 40 || order.requestCustomQuote) {
       setTotalPrice(0);
+      setOrder((prev) => ({
+        ...prev,
+        priceDetails: {
+          pricePerPerson: 0,
+          seafoodSurchargePerPortion: 0,
+          seafoodExtras: [],
+          extras: [],
+          totalPrice: 0,
+        },
+      }));
       return;
     }
 
@@ -164,17 +190,37 @@ const Calculator: React.FC = () => {
       }
     });
 
-    const seafoodExtrasTotal = order.seafoodExtras.reduce((total, extraId) => {
+    const seafoodExtrasDetails = order.seafoodExtras.map((extraId) => {
       const extra = SEAFOOD_EXTRAS.find((e) => e.id === extraId);
+      return extra ? { id: extra.id, price: extra.price } : null;
+    }).filter(Boolean) as { id: string; price: number }[];
+
+    const seafoodExtrasTotal = seafoodExtrasDetails.reduce((total, extra) => {
       return total + (extra ? extra.price * seafoodPortions : 0);
     }, 0);
 
-    const extrasTotal = order.extras.reduce((total, extraId) => {
+    const extrasDetails = order.extras.map((extraId) => {
       const extra = EXTRAS.find((e) => e.id === extraId);
+      return extra ? { id: extra.id, price: extra.price } : null;
+    }).filter(Boolean) as { id: string; price: number }[];
+
+    const extrasTotal = extrasDetails.reduce((total, extra) => {
       return total + (extra ? extra.price * order.guests : 0);
     }, 0);
 
-    setTotalPrice(basePrice + seafoodSurcharge + seafoodExtrasTotal + extrasTotal);
+    const total = basePrice + seafoodSurcharge + seafoodExtrasTotal + extrasTotal;
+    setTotalPrice(total);
+
+    setOrder((prev) => ({
+      ...prev,
+      priceDetails: {
+        pricePerPerson: selectedPackage.pricePerPerson,
+        seafoodSurchargePerPortion: 3,
+        seafoodExtras: seafoodExtrasDetails,
+        extras: extrasDetails,
+        totalPrice: total,
+      },
+    }));
   }, [
     order.guests,
     order.package,
@@ -595,8 +641,8 @@ const Calculator: React.FC = () => {
                       <select
                         value={order.numDifferentPortions}
                         onChange={(e) => {
-                          const num = parseInt(e.target.value);
-                          const newSelections = Array.from({ length: num }, (_, i) => ({
+                          const num = parseInt(e.target.value) || 2;
+                          const newSelections: PaellaSelection[] = Array.from({ length: num }, (_, i) => ({
                             category: order.paellaSelections[i]?.category || '',
                             variety: order.paellaSelections[i]?.variety || '',
                             portions: order.paellaSelections[i]?.portions || '',
@@ -1409,13 +1455,6 @@ const Calculator: React.FC = () => {
                   <h4 className="text-green-800 font-semibold text-lg mb-2">{t('messages.successTitle')}</h4>
                   <p className="text-green-700 text-sm">{t('messages.successMessage')}</p>
                 </div>
-                <button
-                  disabled
-                  className="w-full bg-green-500 text-white px-6 py-3 rounded-lg text-lg font-semibold transition-all duration-200 transform shadow-md hover:bg-green-600 hover:scale-[1.02] hover:shadow-lg cursor-not-allowed"
-                  aria-label={t('buttons.orderSent')}
-                >
-                  {t('buttons.orderSent')}
-                </button>
               </div>
             )}
           </div>
