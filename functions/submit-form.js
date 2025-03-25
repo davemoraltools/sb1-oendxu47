@@ -62,16 +62,16 @@ export const handler = async (event) => {
   const varietyNames = {
     calmars: translations.packs.paellaVarieties.fideua?.find((v) => v.id === 'calmars')?.name || 'Calamares',
     gandia: translations.packs.paellaVarieties.fideua?.find((v) => v.id === 'gandia')?.name || 'Fideuà de Gandía',
-    'mar-muntanya': translations.packs.paellaVarieties.seafood?.find((v) => v.id === 'mar-muntanya')?.name || 'Mar y Montaña',
-    marisc: translations.packs.paellaVarieties.seafood?.find((v) => v.id === 'marisc')?.name || 'Paella de Marisco',
-    valenciana: translations.packs.paellaVarieties.meat?.find((v) => v.id === 'valenciana')?.name || 'Paella Valenciana',
-    costella: translations.packs.paellaVarieties.meat?.find((v) => v.id === 'costella')?.name || 'Paella de Costilla',
-    senyoret: translations.packs.paellaVarieties.seafood?.find((v) => v.id === 'senyoret')?.name || 'Paella del Senyoret',
-    'senyoret-peix': translations.packs.paellaVarieties.seafood?.find((v) => v.id === 'senyoret-peix')?.name || 'Paella de Senyoret de Pescado',
-    negre: translations.packs.paellaVarieties.seafood?.find((v) => v.id === 'negre')?.name || 'Arroz Negro',
-    'bacalla-cebolla': translations.packs.paellaVarieties.seafood?.find((v) => v.id === 'bacalla-cebolla')?.name || 'Paella de Bacalao y Cebolla',
-    verdures: translations.packs.paellaVarieties.verdures?.find((v) => v.id === 'verdures')?.name || 'Paella de Verduras',
-    'verdures-bolets': translations.packs.paellaVarieties.verdures?.find((v) => v.id === 'verdures-bolets')?.name || 'Paella de Verduras y Setas',
+    'mar-muntanya': translations.packs.seafood?.['mar-muntanya'] || 'Mar y Montaña',
+    marisc: translations.packs.seafood?.marisc || 'Paella de Marisco',
+    valenciana: translations.packs.meat?.valenciana || 'Paella Valenciana',
+    costella: translations.packs.meat?.costella || 'Paella de Costilla',
+    senyoret: translations.packs.seafood?.senyoret || 'Paella del Senyoret',
+    'senyoret-peix': translations.packs.seafood?.['senyoret-peix'] || 'Paella de Senyoret de Pescado',
+    negre: translations.packs.seafood?.negre || 'Arroz Negro',
+    'bacalla-cebolla': translations.packs.seafood?.['bacalla-cebolla'] || 'Paella de Bacalao y Cebolla',
+    verdures: translations.packs.verdures?.verdures || 'Paella de Verduras',
+    'verdures-bolets': translations.packs.verdures?.['verdures-bolets'] || 'Paella de Verduras y Setas',
   };
 
   const categoryNames = {
@@ -253,7 +253,7 @@ export const handler = async (event) => {
         !order.requestCustomQuote && order.guests < 40
           ? `
       <h3 style="color: #333; margin-top: 20px;">Desglose del Precio</h3>
-      <div style="background-color: #fef9c3; padding: 15px; border-radius: 8px;">
+      <div style="padding: 15px; border-radius: 8px;">
         <h4 style="color: #333; font-size: 16px; margin-bottom: 10px;">Paellas</h4>
         ${
           order.paellaSelections
