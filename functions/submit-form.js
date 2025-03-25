@@ -23,7 +23,11 @@ export const handler = async (event) => {
   console.log('Sender Email:', senderEmail);
 
   if (!adminEmail || !senderEmail || !process.env.SENDGRID_API_KEY) {
-    console.error('Faltan variables de entorno');
+    console.error('Faltan variables de entorno:', {
+      adminEmail: !!adminEmail,
+      senderEmail: !!senderEmail,
+      sendgridApiKey: !!process.env.SENDGRID_API_KEY,
+    });
     return {
       statusCode: 500,
       body: JSON.stringify({ error: 'Faltan variables de entorno' }),
@@ -409,17 +413,21 @@ Información del Cliente:
   };
 
   try {
-    await sgMail.send(msg);
-    console.log('Correo enviado exitosamente');
+    console.log('Intentando enviar correo con SendGrid...');
+    const sendResult = await sgMail.send(msg);
+    console.log('Correo enviado exitosamente:', sendResult);
     return {
       statusCode: 200,
       body: JSON.stringify({ message: 'Formulario enviado exitosamente' }),
     };
   } catch (error) {
     console.error('Error enviando el correo:', error);
+    if (error.response) {
+      console.error('Detalles del error de SendGrid:', error.response.body);
+    }
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Error enviando el formulario' }),
+      body: JSON.stringify({ error: 'Error enviando el formulario', details: error.message }),
     };
   }
 };
