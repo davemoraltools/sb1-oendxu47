@@ -44,7 +44,10 @@ export const handler = async (event) => {
     return '10-15';
   };
 
-  const packageDisplay = translations.packs.packages[getRange(order.guests)]?.find((p) => p.id === order.package)?.name || order.package || 'No especificado';
+  // Traducir el nombre del paquete
+  const packageDisplay = translations.packs.packages[getRange(order.guests)]?.find((p) => p.id === order.package)?.name
+    ? translations.packs.packages[getRange(order.guests)].find((p) => p.id === order.package).name
+    : order.package || 'No especificado';
 
   const varietyNames = {
     calmars: translations.packs.paellaVarieties.fideua?.find((v) => v.id === 'calmars')?.name || 'Calamares',
@@ -53,6 +56,7 @@ export const handler = async (event) => {
     valenciana: translations.packs.paellaVarieties.meat?.find((v) => v.id === 'valenciana')?.name || 'Paella Valenciana',
     costella: translations.packs.paellaVarieties.meat?.find((v) => v.id === 'costella')?.name || 'Paella de Costilla',
     senyoret: translations.packs.paellaVarieties.seafood?.find((v) => v.id === 'senyoret')?.name || 'Paella del Senyoret',
+    gandia: translations.packs.paellaVarieties.fideua?.find((v) => v.id === 'gandia')?.name || 'Fideuà de Gandia',
   };
 
   const categoryNames = {
@@ -70,6 +74,9 @@ export const handler = async (event) => {
   const seafoodExtrasNames = {
     gambes: translations.packs.seafoodExtrasList?.find((e) => e.id === 'gambes')?.name || 'Gambas',
     musclos: translations.packs.seafoodExtrasList?.find((e) => e.id === 'musclos')?.name || 'Mejillones',
+    bogavante: translations.packs.seafoodExtrasList?.find((e) => e.id === 'bogavante')?.name || 'Bogavante',
+    carabinero: translations.packs.seafoodExtrasList?.find((e) => e.id === 'carabinero')?.name || 'Carabinero',
+    'extra-marisco': translations.packs.seafoodExtrasList?.find((e) => e.id === 'extra-marisco')?.name || 'Extra de Marisco',
   };
 
   const extrasNames = {
@@ -77,6 +84,8 @@ export const handler = async (event) => {
     pa: translations.packs.extrasList?.find((e) => e.id === 'pa')?.name || 'Pan',
     allioli: translations.packs.extrasList?.find((e) => e.id === 'allioli')?.name || 'Alioli',
     postres: translations.packs.extrasList?.find((e) => e.id === 'postres')?.name || 'Postres',
+    sangria: translations.packs.extrasList?.find((e) => e.id === 'sangria')?.name || 'Sangría',
+    iberics: translations.packs.extrasList?.find((e) => e.id === 'iberics')?.name || 'Ibéricos',
   };
 
   const formatDate = (dateStr) => {
