@@ -44,19 +44,34 @@ export const handler = async (event) => {
     return '10-15';
   };
 
-  // Traducir el nombre del paquete
-  const packageDisplay = translations.packs.packages[getRange(order.guests)]?.find((p) => p.id === order.package)?.name
-    ? translations.packs.packages[getRange(order.guests)].find((p) => p.id === order.package).name
-    : order.package || 'No especificado';
+  // Mapear los IDs de los paquetes a sus nombres traducidos
+  const packageNames = {
+    embajador: translations.packs.embajador || 'Pack Embajador',
+    'embajador-show': translations.packs['embajador-show'] || 'Pack Embajador con Show',
+    amanida: translations.packs.amanida || 'Pack Ensalada',
+    'amanida-show': translations.packs['amanida-show'] || 'Pack Ensalada con Show',
+    'pica-pica': translations.packs['pica-pica'] || 'Pack Pica Pica',
+    'pica-pica-show': translations.packs['pica-pica-show'] || 'Pack Pica Pica con Show',
+    'només-paella': translations.packs['només-paella'] || 'Pack Solo Paella',
+    'paella-show': translations.packs['paella-show'] || 'Pack Paella con Show',
+  };
 
+  const packageDisplay = packageNames[order.package] || order.package || 'No especificado';
+
+  // Mapear las variedades de paellas a sus nombres traducidos
   const varietyNames = {
     calmars: translations.packs.paellaVarieties.fideua?.find((v) => v.id === 'calmars')?.name || 'Calamares',
+    gandia: translations.packs.paellaVarieties.fideua?.find((v) => v.id === 'gandia')?.name || 'Fideuà de Gandía',
     'mar-muntanya': translations.packs.paellaVarieties.seafood?.find((v) => v.id === 'mar-muntanya')?.name || 'Mar y Montaña',
-    marisc: translations.packs.paellaVarieties.seafood?.find((v) => v.id === 'marisc')?.name || 'Paella de Mariscos',
+    marisc: translations.packs.paellaVarieties.seafood?.find((v) => v.id === 'marisc')?.name || 'Paella de Marisco',
     valenciana: translations.packs.paellaVarieties.meat?.find((v) => v.id === 'valenciana')?.name || 'Paella Valenciana',
     costella: translations.packs.paellaVarieties.meat?.find((v) => v.id === 'costella')?.name || 'Paella de Costilla',
     senyoret: translations.packs.paellaVarieties.seafood?.find((v) => v.id === 'senyoret')?.name || 'Paella del Senyoret',
-    gandia: translations.packs.paellaVarieties.fideua?.find((v) => v.id === 'gandia')?.name || 'Fideuà de Gandia',
+    'senyoret-peix': translations.packs.paellaVarieties.seafood?.find((v) => v.id === 'senyoret-peix')?.name || 'Paella de Senyoret de Pescado',
+    negre: translations.packs.paellaVarieties.seafood?.find((v) => v.id === 'negre')?.name || 'Arroz Negro',
+    'bacalla-cebolla': translations.packs.paellaVarieties.seafood?.find((v) => v.id === 'bacalla-cebolla')?.name || 'Paella de Bacalao y Cebolla',
+    verdures: translations.packs.paellaVarieties.verdures?.find((v) => v.id === 'verdures')?.name || 'Paella de Verduras',
+    'verdures-bolets': translations.packs.paellaVarieties.verdures?.find((v) => v.id === 'verdures-bolets')?.name || 'Paella de Verduras y Setas',
   };
 
   const categoryNames = {
@@ -68,24 +83,26 @@ export const handler = async (event) => {
 
   const timeSlotNames = {
     midday: translations.labels?.midday || 'Mediodía',
-    evening: translations.labels?.evening || 'Tarde',
+    evening: translations.labels?.evening || 'Tarde-Noche',
   };
 
+  // Mapear los extras de mariscos a sus nombres traducidos
   const seafoodExtrasNames = {
-    gambes: translations.packs.seafoodExtrasList?.find((e) => e.id === 'gambes')?.name || 'Gambas',
-    musclos: translations.packs.seafoodExtrasList?.find((e) => e.id === 'musclos')?.name || 'Mejillones',
-    bogavante: translations.packs.seafoodExtrasList?.find((e) => e.id === 'bogavante')?.name || 'Bogavante',
-    carabinero: translations.packs.seafoodExtrasList?.find((e) => e.id === 'carabinero')?.name || 'Carabinero',
-    'extra-marisco': translations.packs.seafoodExtrasList?.find((e) => e.id === 'extra-marisco')?.name || 'Extra de Marisco',
+    gambes: translations.packs.seafoodExtras?.gambes || 'Gambas',
+    musclos: translations.packs.seafoodExtras?.musclos || 'Mejillones',
+    bogavante: translations.packs.seafoodExtras?.bogavante || 'Bogavante',
+    carabinero: translations.packs.seafoodExtras?.carabinero || 'Carabinero',
+    'extra-marisco': translations.packs.seafoodExtras?.['extra-marisco'] || 'Extra de Marisco',
   };
 
+  // Mapear los extras adicionales a sus nombres traducidos
   const extrasNames = {
-    amanida: translations.packs.extrasList?.find((e) => e.id === 'amanida')?.name || 'Ensalada',
-    pa: translations.packs.extrasList?.find((e) => e.id === 'pa')?.name || 'Pan',
-    allioli: translations.packs.extrasList?.find((e) => e.id === 'allioli')?.name || 'Alioli',
-    postres: translations.packs.extrasList?.find((e) => e.id === 'postres')?.name || 'Postres',
-    sangria: translations.packs.extrasList?.find((e) => e.id === 'sangria')?.name || 'Sangría',
-    iberics: translations.packs.extrasList?.find((e) => e.id === 'iberics')?.name || 'Ibéricos',
+    amanida: translations.packs.extras?.amanida || 'Ensalada',
+    pa: translations.packs.extras?.pa || 'Pan',
+    allioli: translations.packs.extras?.allioli || 'Alioli',
+    postres: translations.packs.extras?.postres || 'Postres',
+    sangria: translations.packs.extras?.sangria || 'Extra de Sangría',
+    iberics: translations.packs.extras?.iberics || 'Extra de Ibéricos',
   };
 
   const formatDate = (dateStr) => {
@@ -128,6 +145,11 @@ export const handler = async (event) => {
       totalPrice: 0,
     };
   }
+
+  // Determinar el tipo de paellas para los extras de mariscos
+  const hasSeafood = order.paellaSelections?.some((sel) => sel.category === 'seafood' && parseInt(sel.portions) > 0);
+  const hasFideua = order.paellaSelections?.some((sel) => sel.category === 'fideua' && parseInt(sel.portions) > 0);
+  const seafoodExtrasType = hasSeafood && hasFideua ? 'paellas de mariscos y fideuà' : hasSeafood ? 'paellas de mariscos' : 'fideuà';
 
   const htmlContent = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
@@ -175,14 +197,7 @@ export const handler = async (event) => {
           <td style="padding: 8px; color: #666;">Extras de mariscos:</td>
           <td style="padding: 8px; color: #333; font-weight: bold;">
             ${order.seafoodExtras.map((extraId) => seafoodExtrasNames[extraId] || extraId).join(', ') || 'Ninguno'}
-            <br/><small style="color: #999;">(Para ${seafoodPortions} porciones de ${
-              order.paellaSelections?.some((sel) => sel.category === 'seafood' && parseInt(sel.portions) > 0) &&
-              order.paellaSelections?.some((sel) => sel.category === 'fideua' && parseInt(sel.portions) > 0)
-                ? 'paellas de mariscos y fideuà'
-                : order.paellaSelections?.some((sel) => sel.category === 'seafood' && parseInt(sel.portions) > 0)
-                ? 'paellas de mariscos'
-                : 'fideuà'
-            })</small>
+            <br/><small style="color: #999;">(Para ${seafoodPortions} porciones de ${seafoodExtrasType})</small>
           </td>
         </tr>
         `
@@ -366,14 +381,7 @@ ${
 ${
   order.seafoodExtras?.length > 0
     ? `
-- Extras de mariscos: ${order.seafoodExtras.map((extraId) => seafoodExtrasNames[extraId] || extraId).join(', ') || 'Ninguno'} (Para ${seafoodPortions} porciones de ${
-        order.paellaSelections?.some((sel) => sel.category === 'seafood' && parseInt(sel.portions) > 0) &&
-        order.paellaSelections?.some((sel) => sel.category === 'fideua' && parseInt(sel.portions) > 0)
-          ? 'paellas de mariscos y fideuà'
-          : order.paellaSelections?.some((sel) => sel.category === 'seafood' && parseInt(sel.portions) > 0)
-          ? 'paellas de mariscos'
-          : 'fideuà'
-      })`
+- Extras de mariscos: ${order.seafoodExtras.map((extraId) => seafoodExtrasNames[extraId] || extraId).join(', ') || 'Ninguno'} (Para ${seafoodPortions} porciones de ${seafoodExtrasType})`
     : ''
 }
 ${
