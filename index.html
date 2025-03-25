@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="description" content="Auténtica paella valenciana cocinada en tu ubicación por nuestro maestro paellero. Eventos especiales con show musical incluido en toda Cataluña." />
+    <meta name="keywords" content="paella valenciana, paella eventos, catering paella, show musical, paella catalana, paella barcelona" />
+    <meta name="author" content="Paella & Songs" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="Paella & Songs - Auténtica Paella Valenciana" />
+    <meta property="og:description" content="Auténtica paella valenciana cocinada en tu ubicación por nuestro maestro paellero. Eventos especiales con show musical incluido en toda Cataluña." />
+    <meta property="og:image" content="/src/assets/paella-hero.jpg" />
+    <meta property="og:url" content="https://paellaandsongs.com" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Paella & Songs - Auténtica Paella Valenciana" />
+    <meta name="twitter:description" content="Auténtica paella valenciana cocinada en tu ubicación por nuestro maestro paellero. Eventos especiales con show musical incluido en toda Cataluña." />
+    <meta name="twitter:image" content="/src/assets/paella-hero.jpg" />
+    <link rel="canonical" href="https://paellaandsongs.com" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paella & Songs - Auténtica Paella Valenciana para Eventos en Cataluña</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FoodEstablishment",
+        "name": "Paella & Songs",
+        "image": "/src/assets/paella-hero.jpg",
+        "description": "Servicio de paella valenciana auténtica para eventos en Cataluña, con opción de show musical.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressRegion": "Cataluña",
+          "addressCountry": "ES"
+        },
+        "servesCuisine": ["Spanish", "Valencian", "Mediterranean"],
+        "priceRange": "€€",
+        "telephone": "+34 123 456 789",
+        "email": "info@paellaandsongs.com"
+      }
+    </script>
+  </head>
+  <body>
+    <form name="paella-form" netlify hidden>
+      <input type="text" name="guests" />
+      <input type="text" name="package" />
+      <input type="text" name="paellaCategory" />
+      <input type="text" name="paellaVariety" />
+      <input type="text" name="secondPaellaCategory" />
+      <input type="text" name="secondPaellaVariety" />
+      <input type="text" name="seafoodExtras" />
+      <input type="text" name="extras" />
+      <input type="text" name="fullName" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="date" name="date" />
+      <input type="text" name="location" />
+      <input type="text" name="timeSlot" />
+      <input type="text" name="requestCustomQuote" />
+    </form>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

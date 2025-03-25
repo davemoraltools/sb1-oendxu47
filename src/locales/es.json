@@ -1,0 +1,301 @@
+{
+  "hero": {
+    "title": "Paella & Songs",
+    "tagline": "Auténtica Paella Valenciana",
+    "description": "Nuestro maestro paellero cocina en tu ubicación la paella que elijas, con complementos especiales. Añade un espectáculo musical para una experiencia inolvidable.",
+    "cta": "¡Pide ahora!"
+  },
+  "testimonials": {
+    "title": "Lo que dicen nuestros clientes",
+    "description": "Descubre las experiencias de quienes ya han disfrutado de nuestras paellas.",
+    "names": {
+      "mariaGarcia": "María García",
+      "juanPerez": "Juan Pérez",
+      "lauraMartinez": "Laura Martínez"
+    },
+    "roles": {
+      "organizerEvents": "Organizadora de Eventos",
+      "loverGastronomy": "Amante de la Gastronomía",
+      "organizerWeddings": "Organizadora de Bodas"
+    },
+    "quotes": {
+      "mariaGarcia": "La paella estuvo increíble. Nuestro evento corporativo fue un éxito total gracias al servicio profesional y los sabores auténticos.",
+      "juanPerez": "Después de haber viajado por toda España, puedo decir que esta paella es de lo más auténtico. El marisco estaba fresco y el arroz perfectamente cocinado.",
+      "lauraMartinez": "Los contratamos para una recepción de boda y superaron todas las expectativas. La presentación fue hermosa y el sabor excepcional."
+    },
+    "rating": "★★★★★"
+  },
+  "gallery": {
+    "title": "Galería de nuestras paellas"
+  },
+  "steps": {
+    "comensales": "Comensales",
+    "eligePack": "Elige tu pack",
+    "selectPaella": "Selecciona tu paella",
+    "assignPortions": "Asigna las raciones",
+    "extras": "Extras",
+    "detalles": "Detalles",
+    "resumen": "Resumen"
+  },
+  "descriptions": {
+    "descriptionComensales": "Indica el número de personas que asistirán a tu evento (mínimo 10).",
+    "descriptionEligePack": "Selecciona el pack que mejor se adapte a tu evento.",
+    "descriptionSelectPaella": "Elige el tipo de paella que deseas para tu evento.",
+    "descriptionAssignPortions": "Asigna el número de raciones para cada tipo de paella.",
+    "descriptionExtras": "Añade extras opcionales para complementar tu pedido.",
+    "descriptionDetalles": "Proporciona los detalles finales para tu pedido.",
+    "descriptionResumen": "Revisa tu pedido antes de confirmarlo.",
+    "paellaLimit": "Puedes seleccionar hasta 3 tipos diferentes de paellas."
+  },
+  "labels": {
+    "guests": "comensales",
+    "allSameQuestion": "¿Todas las raciones son del mismo tipo de paella?",
+    "yes": "Sí",
+    "no": "No",
+    "numDifferentQuestion": "¿Cuántos tipos diferentes de paella quieres?",
+    "paellaSelection": "Selección de paella #{{number}}",
+    "category": "Categoría",
+    "variety": "Variedad de {{category}}",
+    "portions": "raciones",
+    "assignPortions": "Asigna el número de raciones para cada tipo de paella",
+    "totalGuests": "Total de comensales",
+    "assignedPortions": "Raciones asignadas",
+    "reviewAndConfirm": "Revisa tu pedido y confirma",
+    "pricePerPerson": "+{{price}}€ por persona",
+    "extraPrice": "+{{price}}€ por persona",
+    "mainPaella": "Paella Principal",
+    "addSecondPaella": "Añadir una segunda paella (opcional)",
+    "selectedPackage": "Pack seleccionado",
+    "paellas": "Paellas",
+    "noPaella": "No seleccionada",
+    "noPackage": "No seleccionado",
+    "date": "Fecha",
+    "timeSlot": "Horario",
+    "midday": "Mediodía",
+    "evening": "Tarde-Noche",
+    "noTimeSlot": "No seleccionado",
+    "location": "Ubicación",
+    "fullName": "Nombre completo",
+    "email": "Correo electrónico",
+    "phone": "Teléfono",
+    "orderSummary": "Resumen de tu pedido",
+    "noSeafoodExtras": "Ninguno",
+    "seafoodExtras": "Extras de Marisco",
+    "additionalExtras": "Extras Adicionales",
+    "basePrice": "Precio base ({{price}}€ × {{guests}} personas)",
+    "seafoodSurcharge": "Recargo por pescado/marisco (3€ × {{guests}} personas por paella de pescado)",
+    "seafoodExtra": "{{name}} ({{price}}€ × {{guests}} raciones)",
+    "additionalExtra": "{{name}} ({{price}}€ × {{guests}} comensales)",
+    "totalPrice": "Precio total",
+    "customQuote": "Has solicitado un presupuesto personalizado para esta ubicación o grupo grande.",
+    "comments": "Comentarios",
+    "showMore": "Ver más",
+    "showLess": "Ver menos",
+    "paellaPrice": "Paella {{name}} ({{portions}} raciones)",
+    "selectCategory": "Selecciona una categoría",
+    "selectVariety": "Selecciona una variedad",
+    "selectTimeSlot": "Selecciona un horario",
+    "city": "Población",
+    "address": "Dirección",
+    "paellaCategories": {
+      "meat": "Paellas de carne",
+      "seafood": "Paellas de pescado (+3€/persona)",
+      "verdures": "Paellas de verduras",
+      "fideua": "Fideuà (+3€/persona)"
+    },
+    "priceBreakdown": "Desglose de precios",
+    "taken": "Ocupado"
+  },
+  "placeholders": {
+    "selectCategory": "Selecciona una categoría",
+    "selectVariety": "Selecciona una variedad",
+    "selectTimeSlot": "Selecciona un horario",
+    "city": "Escribe tu ciudad",
+    "address": "Escribe tu dirección",
+    "comments": "Añade comentarios o solicitudes especiales (opcional)"
+  },
+  "buttons": {
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "seeIngredients": "Ver ingredientes",
+    "submitting": "Enviando...",
+    "requestQuote": "Solicitar presupuesto",
+    "confirmOrder": "Confirmar pedido",
+    "orderSent": "Solicitar pedido"
+  },
+  "errors": {
+    "guests": "Por favor, indica un número de comensales (mínimo 10).",
+    "guestsMin": "El número mínimo de comensales es 10.",
+    "package": "Por favor, selecciona un pack.",
+    "paella": "Por favor, selecciona al menos un tipo de paella.",
+    "minPortions": "Cada paella debe tener al menos {{min}} raciones.",
+    "details": "Por favor, completa todos los campos requeridos.",
+    "submit": "Hubo un error al enviar el formulario. Por favor, intenta de nuevo.",
+    "locationError": "La ubicación debe estar dentro de Cataluña."
+  },
+  "messages": {
+    "largeGroup": "Para grupos de {{max}} o más comensales, por favor solicita un presupuesto personalizado.",
+    "remainingPortions": "Faltan asignar {{count}} raciones.",
+    "excessPortions": "Has asignado {{count}} raciones de más.",
+    "seafoodExtrasNote": "Los extras de marisco se aplican a {{portions}} raciones de {{type}}.",
+    "priceBreakdownNote": "Los precios incluyen recargos por paellas de marisco y fideuà (3€/persona para {{types}}).",
+    "successTitle": "¡Pedido enviado con éxito!",
+    "successMessage": "Hemos recibido tu pedido. Te contactaremos pronto para confirmar los detalles.",
+    "seafoodAndFideua": "Paellas de pescado y fideuà",
+    "seafoodPaellas": "Paellas de pescado",
+    "fideua": "Fideuà"
+  },
+  "footer": {
+    "contact": {
+      "title": "Contacto",
+      "phone": "+34 660 881 580",
+      "email": "info@paellaandsongs.com"
+    },
+    "social": {
+      "title": "Síguenos"
+    },
+    "links": {
+      "title": "Enlaces"
+    },
+    "quickLinks": {
+      "home": "Inicio",
+      "order": "Pedir",
+      "testimonials": "Testimonios",
+      "privacy": "Política de Privacidad",
+      "terms": "Términos y Condiciones"
+    },
+    "language": "Español",
+    "copyright": "© 2025 Paella & Songs. Todos los derechos reservados."
+  },
+  "packs": {
+    "embajador": "Pack Embajador",
+    "embajador-show": "Pack Embajador con Show",
+    "amanida": "Pack Ensalada",
+    "amanida-show": "Pack Ensalada con Show",
+    "pica-pica": "Pack Pica Pica",
+    "pica-pica-show": "Pack Pica Pica con Show",
+    "només-paella": "Pack Solo Paella",
+    "paella-show": "Pack Paella con Show",
+    "description": {
+      "embajador": "Incluye Snacks, Embutidos Ibéricos, Ensalada Valenciana, Sangría casera y paella.",
+      "embajador-show": "Incluye Snacks, Embutidos Ibéricos, Ensalada Valenciana, Sangría casera, paella y espectáculo en vivo.",
+      "amanida": "Incluye Ensalada Valenciana, Sangría casera y paella.",
+      "amanida-show": "Incluye Ensalada Valenciana, Sangría casera, paella y espectáculo en vivo.",
+      "pica-pica": "Incluye entrantes y paella.",
+      "pica-pica-show": "Incluye entrantes, paella y espectáculo en vivo.",
+      "només-paella": "Solo incluye la paella.",
+      "paella-show": "Solo incluye la paella y un espectáculo en vivo."
+    },
+    "meat": {
+      "valenciana": "Paella Valenciana",
+      "hivern": "Paella Valenciana de Invierno",
+      "senyoret": "Paella de Senyoret",
+      "costella": "Paella de Costilla",
+      "valenciana.ingredients": "Pollo, conejo, judías verdes, garrofón, tomate, aceite de oliva, azafrán, pimentón y arroz.",
+      "hivern.ingredients": "Pollo, conejo, alcachofas, habas, tomate, aceite de oliva, azafrán, pimentón y arroz.",
+      "senyoret.ingredients": "Pollo, lomo de cerdo, butifarra catalana, tomate, aceite de oliva, azafrán, pimentón y arroz.",
+      "costella.ingredients": "Costilla de cerdo, setas, cebolla, tomate, aceite de oliva, azafrán, pimentón y arroz."
+    },
+    "seafood": {
+      "senyoret-peix": "Paella de Senyoret de Pescado",
+      "marisc": "Paella de Marisco",
+      "negre": "Arroz Negro",
+      "calamars": "Paella de Calamares y Alcachofa",
+      "bacalla-cebolla": "Paella de Bacalao y Cebolla",
+      "mar-muntanya": "Paella de Mar y Montaña",
+      "senyoret-peix.ingredients": "Calamares, gambas peladas, rape, atún, cebolla, tomate, aceite de oliva, azafrán, pimentón y arroz.",
+      "marisc.ingredients": "Calamares, gambas, rape, cigalas, cebolla, tomate, aceite de oliva, azafrán, pimentón y arroz.",
+      "negre.ingredients": "Calamares, gambas, rape, atún, cebolla, tinta de calamar, tomate, aceite de oliva, azafrán, pimentón y arroz.",
+      "calamars.ingredients": "Calamares, alcachofas, tomate, aceite de oliva, azafrán, pimentón y arroz.",
+      "bacalla-cebolla.ingredients": "Bacalao, cebolla, patata, tomate, aceite de oliva, azafrán, pimentón y arroz.",
+      "mar-muntanya.ingredients": "Pollo, gambas, rape, calamares, tomate, aceite de oliva, azafrán, pimentón y arroz."
+    },
+    "verdures": {
+      "verdures": "Paella de Verduras",
+      "verdures-bolets": "Paella de Verduras y Setas",
+      "verdures.ingredients": "Judías verdes, alcachofas, pimientos, zanahoria, habas, puerro, garrofón, tomate, aceite de oliva, azafrán, pimentón y arroz.",
+      "verdures-bolets.ingredients": "Judías verdes, alcachofas, setas, tomate, aceite de oliva, azafrán, pimentón y arroz."
+    },
+    "fideua": {
+      "gandia": "Fideuà de Gandía",
+      "gandia.ingredients": "Fideos, gambas, calamares, pescado blanco, tomate, aceite de oliva, azafrán, pimentón."
+    },
+    "seafoodExtrasList": [
+      { "id": "bogavante", "name": "packs.seafoodExtras.bogavante", "description": "packs.seafoodExtras.bogavante.description", "price": 7 },
+      { "id": "carabinero", "name": "packs.seafoodExtras.carabinero", "description": "packs.seafoodExtras.carabinero.description", "price": 9 },
+      { "id": "extra-marisco", "name": "packs.seafoodExtras.extra-marisco", "description": "packs.seafoodExtras.extra-marisco.description", "price": 3 }
+    ],
+    "extrasList": [
+      { "id": "sangria", "name": "packs.extras.sangria", "description": "packs.extras.sangria.description", "price": 3 },
+      { "id": "iberics", "name": "packs.extras.iberics", "description": "packs.extras.iberics.description", "price": 5 }
+    ],
+    "packages": {
+      "10-15": [
+        { "id": "embajador", "name": "packs.embajador", "pricePerPerson": 32, "description": "packs.description.embajador" },
+        { "id": "embajador-show", "name": "packs.embajador-show", "pricePerPerson": 42, "description": "packs.description.embajador-show" }
+      ],
+      "16-20": [
+        { "id": "embajador", "name": "packs.embajador", "pricePerPerson": 29, "description": "packs.description.embajador" },
+        { "id": "embajador-show", "name": "packs.embajador-show", "pricePerPerson": 39, "description": "packs.description.embajador-show" },
+        { "id": "amanida", "name": "packs.amanida", "pricePerPerson": 24, "description": "packs.description.amanida" },
+        { "id": "amanida-show", "name": "packs.amanida-show", "pricePerPerson": 34, "description": "packs.description.amanida-show" }
+      ],
+      "20-25": [
+        { "id": "embajador", "name": "packs.embajador", "pricePerPerson": 27, "description": "packs.description.embajador" },
+        { "id": "embajador-show", "name": "packs.embajador-show", "pricePerPerson": 37, "description": "packs.description.embajador-show" },
+        { "id": "amanida", "name": "packs.amanida", "pricePerPerson": 22, "description": "packs.description.amanida" },
+        { "id": "amanida-show", "name": "packs.amanida-show", "pricePerPerson": 34, "description": "packs.description.amanida-show" },
+        { "id": "pica-pica", "name": "packs.pica-pica", "pricePerPerson": 21, "description": "packs.description.pica-pica" },
+        { "id": "pica-pica-show", "name": "packs.pica-pica-show", "pricePerPerson": 30, "description": "packs.description.pica-pica-show" }
+      ],
+      "25+": [
+        { "id": "embajador", "name": "packs.embajador", "pricePerPerson": 26, "description": "packs.description.embajador" },
+        { "id": "embajador-show", "name": "packs.embajador-show", "pricePerPerson": 36, "description": "packs.description.embajador-show" },
+        { "id": "amanida", "name": "packs.amanida", "pricePerPerson": 21, "description": "packs.description.amanida" },
+        { "id": "amanida-show", "name": "packs.amanida-show", "pricePerPerson": 33, "description": "packs.description.amanida-show" },
+        { "id": "pica-pica", "name": "packs.pica-pica", "pricePerPerson": 20, "description": "packs.description.pica-pica" },
+        { "id": "pica-pica-show", "name": "packs.pica-pica-show", "pricePerPerson": 29, "description": "packs.description.pica-pica-show" },
+        { "id": "només-paella", "name": "packs.només-paella", "pricePerPerson": 13, "description": "packs.description.només-paella" },
+        { "id": "paella-show", "name": "packs.paella-show", "pricePerPerson": 17, "description": "packs.description.paella-show" }
+      ],
+      "40+": []
+    },
+    "paellaVarieties": {
+      "meat": [
+        { "id": "valenciana", "name": "packs.meat.valenciana", "ingredients": "packs.meat.valenciana.ingredients" },
+        { "id": "hivern", "name": "packs.meat.hivern", "ingredients": "packs.meat.hivern.ingredients" },
+        { "id": "senyoret", "name": "packs.meat.senyoret", "ingredients": "packs.meat.senyoret.ingredients" },
+        { "id": "costella", "name": "packs.meat.costella", "ingredients": "packs.meat.costella.ingredients" }
+      ],
+      "seafood": [
+        { "id": "senyoret-peix", "name": "packs.seafood.senyoret-peix", "ingredients": "packs.seafood.senyoret-peix.ingredients" },
+        { "id": "marisc", "name": "packs.seafood.marisc", "ingredients": "packs.seafood.marisc.ingredients" },
+        { "id": "negre", "name": "packs.seafood.negre", "ingredients": "packs.seafood.negre.ingredients" },
+        { "id": "calamars", "name": "packs.seafood.calamars", "ingredients": "packs.seafood.calamars.ingredients" },
+        { "id": "bacalla-cebolla", "name": "packs.seafood.bacalla-cebolla", "ingredients": "packs.seafood.bacalla-cebolla.ingredients" },
+        { "id": "mar-muntanya", "name": "packs.seafood.mar-muntanya", "ingredients": "packs.seafood.mar-muntanya.ingredients" }
+      ],
+      "verdures": [
+        { "id": "verdures", "name": "packs.verdures.verdures", "ingredients": "packs.verdures.verdures.ingredients" },
+        { "id": "verdures-bolets", "name": "packs.verdures.verdures-bolets", "ingredients": "packs.verdures.verdures-bolets.ingredients" }
+      ],
+      "fideua": [
+        { "id": "gandia", "name": "packs.fideua.gandia", "ingredients": "packs.fideua.gandia.ingredients" }
+      ]
+    },
+    "seafoodExtras": {
+      "bogavante": "Bogavante",
+      "carabinero": "Carabinero",
+      "extra-marisco": "Extra de marisco",
+      "bogavante.description": "Añade un bogavante fresco a tu paella",
+      "carabinero.description": "Añade carabineros frescos a tu paella",
+      "extra-marisco.description": "Aumenta la cantidad de marisco en tu paella"
+    },
+    "extras": {
+      "sangria": "Extra de Sangría",
+      "iberics": "Extra de Ibéricos",
+      "sangria.description": "Sangría adicional para tu evento",
+      "iberics.description": "Selección adicional de embutidos y quesos"
+    }
+  }
+}

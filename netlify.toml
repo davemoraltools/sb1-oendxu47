@@ -1,0 +1,7 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[functions]
+  directory = "functions"
+# node_bundler = "esbuild"  # Comenta esta línea o cámbiala a "npm"
