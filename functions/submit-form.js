@@ -829,14 +829,17 @@ Si tienes alguna pregunta o necesitas modificar tu pedido, no dudes en contactar
 - Teléfono: ${translations.footer.contact.phone || 'No especificado'}
   `;
 
-  // Asunto del correo (formato breve)
-  const emailSubject = `Pedido #${orderNumber} - ${order.fullName || 'Cliente'} - ${order.guests || 'N/A'} pax`;
+  // Asunto del correo para el administrador (formato para Trello)
+  const adminEmailSubject = `Pedido #${orderNumber} - ${order.fullName || 'Cliente'} - ${order.guests || 'N/A'} pax`;
+
+  // Asunto del correo para el cliente (nuevo formato con emoji)
+  const clientEmailSubject = `🥘 Paella & Songs - ¡Pedido #${orderNumber} Recibido!`;
 
   // Correo para el administrador
   const msgAdmin = {
     to: adminEmail,
     from: senderEmail,
-    subject: emailSubject,
+    subject: adminEmailSubject,
     text: textContentAdmin,
     html: htmlContentAdmin
   };
@@ -845,7 +848,7 @@ Si tienes alguna pregunta o necesitas modificar tu pedido, no dudes en contactar
   const msgClient = {
     to: order.email,
     from: senderEmail,
-    subject: emailSubject,
+    subject: clientEmailSubject,
     text: textContentClient,
     html: htmlContentClient
   };
