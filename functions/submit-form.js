@@ -491,7 +491,7 @@ ${order.extras
 - **Teléfono:** ${order.phone || 'No especificado'}
   `;
 
-  // Contenido del correo para el cliente (HTML)
+  // Contenido del correo para el cliente (HTML con desglose mejorado)
   const htmlContentClient = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
       <h2 style="color: #333; text-align: center;">¡Gracias por tu pedido, ${order.fullName || 'Cliente'}!</h2>
@@ -595,93 +595,116 @@ ${order.extras
           ? `
       <h3 style="color: #333; margin-top: 20px;">Desglose del Precio</h3>
       <div style="padding: 15px; border-radius: 8px;">
-        <h4 style="color: #333; font-size: 16px; margin-bottom: 10px;">Paellas</h4>
-        ${
-          order.paellaSelections
-            ? order.paellaSelections
-                .filter((sel) => parseInt(sel.portions) > 0)
-                .map((sel) => {
-                  const portions = parseInt(sel.portions);
-                  const basePrice = order.priceDetails.pricePerPerson * portions;
-                  const surcharge = (sel.category === 'seafood' || sel.category === 'fideua') ? order.priceDetails.seafoodSurchargePerPortion * portions : 0;
-                  return `
-                    <div style="margin-bottom: 10px;">
-                      <div style="display: flex; justify-content: space-between; color: #666;">
-                        <span>${varietyNames[sel.variety] || sel.variety || 'No especificado'} (${portions} porciones)</span>
-                        <span>${formatPrice(basePrice)}€</span>
-                      </div>
+        <table style="width: 100%; border-collapse: collapse;">
+          <tr>
+            <td colspan="2" style="color: #333; font-size: 16px; font-weight: bold; padding-bottom: 5px;">Paellas</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="border-bottom: 1px solid #e0e0e0; padding-bottom: 5px;"></td>
+          </tr>
+          ${
+            order.paellaSelections
+              ? order.paellaSelections
+                  .filter((sel) => parseInt(sel.portions) > 0)
+                  .map((sel) => {
+                    const portions = parseInt(sel.portions);
+                    const basePrice = order.priceDetails.pricePerPerson * portions;
+                    const surcharge = (sel.category === 'seafood' || sel.category === 'fideua') ? order.priceDetails.seafoodSurchargePerPortion * portions : 0;
+                    return `
+                      <tr>
+                        <td style="padding: 5px 0; color: #666;">${varietyNames[sel.variety] || sel.variety || 'No especificado'} (${portions} porciones)</td>
+                        <td style="padding: 5px 0; color: #666; text-align: right;">${formatPrice(basePrice)}€</td>
+                      </tr>
                       ${
                         surcharge > 0
                           ? `
-                      <div style="display: flex; justify-content: space-between; color: #999; font-size: 14px;">
-                        <span>Recargo por ${sel.category === 'seafood' ? 'mariscos' : 'fideuà'} (${formatPrice(order.priceDetails.seafoodSurchargePerPortion)}€ × ${portions})</span>
-                        <span>${formatPrice(surcharge)}€</span>
-                      </div>
+                      <tr>
+                        <td style="padding: 5px 0; color: #999; font-size: 14px;">Recargo por ${sel.category === 'seafood' ? 'mariscos' : 'fideuà'} (${formatPrice(order.priceDetails.seafoodSurchargePerPortion)}€ × ${portions})</td>
+                        <td style="padding: 5px 0; color: #999; font-size: 14px; text-align: right;">${formatPrice(surcharge)}€</td>
+                      </tr>
                       `
                           : ''
                       }
-                    </div>
-                  `;
-                })
-                .join('')
-            : '<p>No hay paellas seleccionadas</p>'
-        }
+                    `;
+                  })
+                  .join('')
+              : '<tr><td colspan="2" style="color: #666;">No hay paellas seleccionadas</td></tr>'
+          }
 
-        ${
-          order.seafoodExtras?.length > 0
-            ? `
-        <h4 style="color: #333; font-size: 16px; margin-top: 15px; margin-bottom: 10px;">Extras de Mariscos</h4>
-        ${order.seafoodExtras
-          .map((extraId) => {
-            const extra = order.priceDetails.seafoodExtras?.find((e) => e.id === extraId);
-            if (!extra) {
-              console.warn(`Extra de mariscos no encontrado: ${extraId}`);
-              return '';
-            }
-            const extraTotal = extra.price * seafoodPortions;
-            return `
-              <div style="display: flex; justify-content: space-between; color: #666; margin-bottom: 5px;">
-                <span>${seafoodExtrasNames[extraId] || extraId} (${formatPrice(extra.price)}€ × ${seafoodPortions} porciones)</span>
-                <span>${formatPrice(extraTotal)}€</span>
-              </div>
-            `;
-          })
-          .join('')}
-        `
-            : ''
-        }
+          ${
+            order.seafoodExtras?.length > 0
+              ? `
+          <tr>
+            <td colspan="2" style="padding-top: 15px;"></td>
+          </tr>
+          <tr>
+            <td colspan="2" style="color: #333; font-size: 16px; font-weight: bold; padding-bottom: 5px;">Extras de Mariscos</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="border-bottom: 1px solid #e0e0e0; padding-bottom: 5px;"></td>
+          </tr>
+          ${order.seafoodExtras
+            .map((extraId) => {
+              const extra = order.priceDetails.seafoodExtras?.find((e) => e.id === extraId);
+              if (!extra) {
+                console.warn(`Extra de mariscos no encontrado: ${extraId}`);
+                return '';
+              }
+              const extraTotal = extra.price * seafoodPortions;
+              return `
+                <tr>
+                  <td style="padding: 5px 0; color: #666;">${seafoodExtrasNames[extraId] || extraId} (${formatPrice(extra.price)}€ × ${seafoodPortions} porciones)</td>
+                  <td style="padding: 5px 0; color: #666; text-align: right;">${formatPrice(extraTotal)}€</td>
+                </tr>
+              `;
+            })
+            .join('')}
+          `
+              : ''
+          }
 
-        ${
-          order.extras?.length > 0
-            ? `
-        <h4 style="color: #333; font-size: 16px; margin-top: 15px; margin-bottom: 10px;">Extras Adicionales</h4>
-        ${order.extras
-          .map((extraId) => {
-            const extra = order.priceDetails.extras?.find((e) => e.id === extraId);
-            if (!extra) {
-              console.warn(`Extra adicional no encontrado: ${extraId}`);
-              return '';
-            }
-            const extraTotal = extra.price * order.guests;
-            return `
-              <div style="display: flex; justify-content: space-between; color: #666; margin-bottom: 5px;">
-                <span>${extrasNames[extraId] || extraId} (${formatPrice(extra.price)}€ × ${order.guests} comensales)</span>
-                <span>${formatPrice(extraTotal)}€</span>
-              </div>
-            `;
-          })
-          .join('')}
-        `
-            : ''
-        }
+          ${
+            order.extras?.length > 0
+              ? `
+          <tr>
+            <td colspan="2" style="padding-top: 15px;"></td>
+          </tr>
+          <tr>
+            <td colspan="2" style="color: #333; font-size: 16px; font-weight: bold; padding-bottom: 5px;">Extras Adicionales</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="border-bottom: 1px solid #e0e0e0; padding-bottom: 5px;"></td>
+          </tr>
+          ${order.extras
+            .map((extraId) => {
+              const extra = order.priceDetails.extras?.find((e) => e.id === extraId);
+              if (!extra) {
+                console.warn(`Extra adicional no encontrado: ${extraId}`);
+                return '';
+              }
+              const extraTotal = extra.price * order.guests;
+              return `
+                <tr>
+                  <td style="padding: 5px 0; color: #666;">${extrasNames[extraId] || extraId} (${formatPrice(extra.price)}€ × ${order.guests} comensales)</td>
+                  <td style="padding: 5px 0; color: #666; text-align: right;">${formatPrice(extraTotal)}€</td>
+                </tr>
+              `;
+            })
+            .join('')}
+          `
+              : ''
+          }
 
-        <div style="display: flex; justify-content: space-between; font-size: 18px; font-weight: bold; margin-top: 15px; color: #333;">
-          <span>Total:</span>
-          <span style="color: #d97706;">${formatPrice(order.priceDetails.totalPrice)}€</span>
-        </div>
-        <div style="text-align: right; color: #999; font-size: 14px; margin-top: 5px;">
-          <span>IVA incluido</span>
-        </div>
+          <tr>
+            <td colspan="2" style="border-top: 1px solid #e0e0e0; padding-top: 10px; margin-top: 15px;"></td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 0; font-size: 18px; font-weight: bold; color: #333;">Total:</td>
+            <td style="padding: 10px 0; font-size: 18px; font-weight: bold; color: #d97706; text-align: right;">
+              ${formatPrice(order.priceDetails.totalPrice)}€ <span style="font-size: 14px; color: #999; font-weight: normal;">(IVA incluido)</span>
+            </td>
+          </tr>
+        </table>
       </div>
       `
           : ''
