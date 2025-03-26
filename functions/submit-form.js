@@ -52,7 +52,7 @@ export const handler = async (event) => {
       const year = date.getFullYear().toString().slice(-2); // Últimas 2 cifras del año
       const month = String(date.getMonth() + 1).padStart(2, '0'); // Mes con 2 dígitos
       const day = String(date.getDate()).padStart(2, '0'); // Día con 2 dígitos
-      return `${year}${month}${day}`; // Ejemplo: 2025-03-26 → 250326
+      return `${year}${month}${day}`; // Ejemplo: 2025-03-27 → 250327
     } catch (error) {
       console.error('Error generando el número de pedido:', error);
       return '000000';
@@ -70,37 +70,42 @@ export const handler = async (event) => {
     'pica-pica': translations.packs['pica-pica'] || 'Pack Pica Pica',
     'pica-pica-show': translations.packs['pica-pica-show'] || 'Pack Pica Pica con Show',
     'només-paella': translations.packs['només-paella'] || 'Pack Solo Paella',
-    'paella-show': translations.packs['paella-show'] || 'Pack Paella con Show',
+    'paella-show': translations.packs['paella-show'] || 'Pack Paella con Show'
   };
 
   const packageDisplay = packageNames[order.package] || order.package || 'No especificado';
 
-  // Mapear las variedades de paellas a sus nombres traducidos
+  // Mapear todas las variedades de paellas a sus nombres traducidos
   const varietyNames = {
-    calmars: translations.packs.paellaVarieties.fideua?.find((v) => v.id === 'calmars')?.name || 'Calamares',
-    gandia: translations.packs.paellaVarieties.fideua?.find((v) => v.id === 'gandia')?.name || 'Fideuà de Gandía',
-    'mar-muntanya': translations.packs.seafood?.['mar-muntanya'] || 'Mar y Montaña',
-    marisc: translations.packs.seafood?.marisc || 'Paella de Marisco',
+    // Carne (packs.meat)
     valenciana: translations.packs.meat?.valenciana || 'Paella Valenciana',
+    hivern: translations.packs.meat?.hivern || 'Paella Valenciana de Invierno',
+    senyoret: translations.packs.meat?.senyoret || 'Paella de Senyoret',
     costella: translations.packs.meat?.costella || 'Paella de Costilla',
-    senyoret: translations.packs.seafood?.senyoret || 'Paella del Senyoret',
+    // Mariscos (packs.seafood)
+    'mar-muntanya': translations.packs.seafood?.['mar-muntanya'] || 'Paella de Mar y Montaña',
+    marisc: translations.packs.seafood?.marisc || 'Paella de Marisco',
     'senyoret-peix': translations.packs.seafood?.['senyoret-peix'] || 'Paella de Senyoret de Pescado',
     negre: translations.packs.seafood?.negre || 'Arroz Negro',
+    calamars: translations.packs.seafood?.calamars || 'Paella de Calamares y Alcachofa',
     'bacalla-cebolla': translations.packs.seafood?.['bacalla-cebolla'] || 'Paella de Bacalao y Cebolla',
+    // Verduras (packs.verdures)
     verdures: translations.packs.verdures?.verdures || 'Paella de Verduras',
     'verdures-bolets': translations.packs.verdures?.['verdures-bolets'] || 'Paella de Verduras y Setas',
+    // Fideuà (packs.fideua)
+    gandia: translations.packs.fideua?.gandia || 'Fideuà de Gandía'
   };
 
   const categoryNames = {
     seafood: translations.labels.paellaCategories?.seafood || 'Mariscos',
     meat: translations.labels.paellaCategories?.meat || 'Carnes',
     verdures: translations.labels.paellaCategories?.verdures || 'Verduras',
-    fideua: translations.labels.paellaCategories?.fideua || 'Fideuà',
+    fideua: translations.labels.paellaCategories?.fideua || 'Fideuà'
   };
 
   const timeSlotNames = {
     midday: translations.labels?.midday || 'Mediodía',
-    evening: translations.labels?.evening || 'Tarde-Noche',
+    evening: translations.labels?.evening || 'Tarde-Noche'
   };
 
   // Mapear los extras de mariscos a sus nombres traducidos
@@ -109,7 +114,7 @@ export const handler = async (event) => {
     musclos: translations.packs.seafoodExtras?.musclos || 'Mejillones',
     bogavante: translations.packs.seafoodExtras?.bogavante || 'Bogavante',
     carabinero: translations.packs.seafoodExtras?.carabinero || 'Carabinero',
-    'extra-marisco': translations.packs.seafoodExtras?.['extra-marisco'] || 'Extra de Marisco',
+    'extra-marisco': translations.packs.seafoodExtras?.['extra-marisco'] || 'Extra de Marisco'
   };
 
   // Mapear los extras adicionales a sus nombres traducidos
@@ -119,7 +124,7 @@ export const handler = async (event) => {
     allioli: translations.packs.extras?.allioli || 'Alioli',
     postres: translations.packs.extras?.postres || 'Postres',
     sangria: translations.packs.extras?.sangria || 'Extra de Sangría',
-    iberics: translations.packs.extras?.iberics || 'Extra de Ibéricos',
+    iberics: translations.packs.extras?.iberics || 'Extra de Ibéricos'
   };
 
   const formatDate = (dateStr) => {
@@ -168,7 +173,7 @@ export const handler = async (event) => {
   const hasFideua = order.paellaSelections?.some((sel) => sel.category === 'fideua' && parseInt(sel.portions) > 0);
   const seafoodExtrasType = hasSeafood && hasFideua ? 'paellas de mariscos y fideuà' : hasSeafood ? 'paellas de mariscos' : 'fideuà';
 
-  // Contenido del correo para el administrador
+  // Contenido del correo para el administrador (HTML)
   const htmlContentAdmin = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
       <h2 style="color: #333; text-align: center;">Nuevo Pedido Recibido</h2>
@@ -356,6 +361,9 @@ export const handler = async (event) => {
           <span>Total:</span>
           <span style="color: #d97706;">${formatPrice(order.priceDetails.totalPrice)}€</span>
         </div>
+        <div style="text-align: right; color: #999; font-size: 14px; margin-top: 5px;">
+          <span>IVA incluido</span>
+        </div>
       </div>
       `
           : ''
@@ -379,49 +387,51 @@ export const handler = async (event) => {
     </div>
   `;
 
+  // Contenido del correo para el administrador (Texto plano con Markdown para Trello)
   const textContentAdmin = `
-Nuevo Pedido Recibido
+# Resumen del Pedido
 
-Resumen del Pedido:
-- Número de comensales: ${order.guests || 'No especificado'}
+- **Número de comensales:** ${order.guests || 'No especificado'}
 ${
   order.guests < 40
     ? `
-- Paquete seleccionado: ${packageDisplay}
-- Paellas: ${
-      order.paellaSelections
-        ? order.paellaSelections
-            .filter((sel) => parseInt(sel.portions) > 0)
-            .map((sel) => `${varietyNames[sel.variety] || sel.variety || 'No especificado'} (${parseInt(sel.portions)} porciones)`)
-            .join(', ')
-        : 'Ninguna seleccionada'
-    }
+- **Paquete seleccionado:** ${packageDisplay}
+- **Paellas:**  
+  ${
+    order.paellaSelections
+      ? order.paellaSelections
+          .filter((sel) => parseInt(sel.portions) > 0)
+          .map((sel) => `- ${varietyNames[sel.variety] || sel.variety || 'No especificado'} (${parseInt(sel.portions)} porciones)`)
+          .join('\n  ')
+      : 'Ninguna seleccionada'
+  }
 ${
   order.seafoodExtras?.length > 0
     ? `
-- Extras de mariscos: ${order.seafoodExtras.map((extraId) => seafoodExtrasNames[extraId] || extraId).join(', ') || 'Ninguno'} (Para ${seafoodPortions} porciones de ${seafoodExtrasType})`
+- **Extras de mariscos:** ${order.seafoodExtras.map((extraId) => seafoodExtrasNames[extraId] || extraId).join(', ') || 'Ninguno'} *(Para ${seafoodPortions} porciones de ${seafoodExtrasType})*`
     : ''
 }
 ${
   order.extras?.length > 0
     ? `
-- Extras adicionales: ${order.extras.map((extraId) => extrasNames[extraId] || extraId).join(', ') || 'Ninguno'}`
+- **Extras adicionales:** ${order.extras.map((extraId) => extrasNames[extraId] || extraId).join(', ') || 'Ninguno'}`
     : ''
 }
 `
     : ''
 }
-- Fecha: ${formatDate(order.date)}
-- Franja horaria: ${timeSlotNames[order.timeSlot] || order.timeSlot || 'No especificada'}
-- Ciudad: ${order.city || 'No especificada'}
-${order.address ? `- Dirección: ${order.address}` : ''}
-${order.comments ? `- Comentarios: ${order.comments}` : ''}
+- **Fecha:** ${formatDate(order.date)}
+- **Franja horaria:** ${timeSlotNames[order.timeSlot] || order.timeSlot || 'No especificada'}
+- **Ciudad:** ${order.city || 'No especificada'}
+${order.address ? `- **Dirección:** ${order.address}` : ''}
+${order.comments ? `- **Comentarios:** ${order.comments}` : ''}
 
 ${
   !order.requestCustomQuote && order.guests < 40
     ? `
-Desglose del Precio:
-Paellas:
+## Desglose del Precio
+
+### Paellas
 ${
   order.paellaSelections
     ? order.paellaSelections
@@ -430,9 +440,9 @@ ${
           const portions = parseInt(sel.portions);
           const basePrice = order.priceDetails.pricePerPerson * portions;
           const surcharge = (sel.category === 'seafood' || sel.category === 'fideua') ? order.priceDetails.seafoodSurchargePerPortion * portions : 0;
-          return `- ${varietyNames[sel.variety] || sel.variety || 'No especificado'} (${portions} porciones): ${formatPrice(basePrice)}€${
+          return `- **${varietyNames[sel.variety] || sel.variety || 'No especificado'}** (${portions} porciones): ${formatPrice(basePrice)}€${
             surcharge > 0
-              ? `\n  Recargo por ${sel.category === 'seafood' ? 'mariscos' : 'fideuà'} (${formatPrice(order.priceDetails.seafoodSurchargePerPortion)}€ × ${portions}): ${formatPrice(surcharge)}€`
+              ? `\n  - Recargo por ${sel.category === 'seafood' ? 'mariscos' : 'fideuà'} (${formatPrice(order.priceDetails.seafoodSurchargePerPortion)}€ × ${portions}): ${formatPrice(surcharge)}€`
               : ''
           }`;
         })
@@ -442,13 +452,13 @@ ${
 ${
   order.seafoodExtras?.length > 0
     ? `
-Extras de Mariscos:
+### Extras de Mariscos
 ${order.seafoodExtras
   .map((extraId) => {
     const extra = order.priceDetails.seafoodExtras?.find((e) => e.id === extraId);
     if (!extra) return '';
     const extraTotal = extra.price * seafoodPortions;
-    return `- ${seafoodExtrasNames[extraId] || extraId} (${formatPrice(extra.price)}€ × ${seafoodPortions} porciones): ${formatPrice(extraTotal)}€`;
+    return `- **${seafoodExtrasNames[extraId] || extraId}** (${formatPrice(extra.price)}€ × ${seafoodPortions} porciones): ${formatPrice(extraTotal)}€`;
   })
   .join('\n')}
 `
@@ -457,30 +467,31 @@ ${order.seafoodExtras
 ${
   order.extras?.length > 0
     ? `
-Extras Adicionales:
+### Extras Adicionales
 ${order.extras
   .map((extraId) => {
     const extra = order.priceDetails.extras?.find((e) => e.id === extraId);
     if (!extra) return '';
     const extraTotal = extra.price * order.guests;
-    return `- ${extrasNames[extraId] || extraId} (${formatPrice(extra.price)}€ × ${order.guests} comensales): ${formatPrice(extraTotal)}€`;
+    return `- **${extrasNames[extraId] || extraId}** (${formatPrice(extra.price)}€ × ${order.guests} comensales): ${formatPrice(extraTotal)}€`;
   })
   .join('\n')}
 `
     : ''
 }
-Total: ${formatPrice(order.priceDetails.totalPrice)}€
+**Total:** ${formatPrice(order.priceDetails.totalPrice)}€ *(IVA incluido)*
 `
     : ''
 }
 
-Información del Cliente:
-- Nombre completo: ${order.fullName || 'No especificado'}
-- Correo electrónico: ${order.email || 'No especificado'}
-- Teléfono: ${order.phone || 'No especificado'}
+## Información del Cliente
+
+- **Nombre completo:** ${order.fullName || 'No especificado'}
+- **Correo electrónico:** ${order.email || 'No especificado'}
+- **Teléfono:** ${order.phone || 'No especificado'}
   `;
 
-  // Contenido del correo para el cliente
+  // Contenido del correo para el cliente (HTML)
   const htmlContentClient = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
       <h2 style="color: #333; text-align: center;">¡Gracias por tu pedido, ${order.fullName || 'Cliente'}!</h2>
@@ -668,6 +679,9 @@ Información del Cliente:
           <span>Total:</span>
           <span style="color: #d97706;">${formatPrice(order.priceDetails.totalPrice)}€</span>
         </div>
+        <div style="text-align: right; color: #999; font-size: 14px; margin-top: 5px;">
+          <span>IVA incluido</span>
+        </div>
       </div>
       `
           : ''
@@ -688,6 +702,7 @@ Información del Cliente:
     </div>
   `;
 
+  // Contenido del correo para el cliente (Texto plano sin Markdown)
   const textContentClient = `
 ¡Gracias por tu pedido, ${order.fullName || 'Cliente'}!
 
@@ -780,7 +795,7 @@ ${order.extras
 `
     : ''
 }
-Total: ${formatPrice(order.priceDetails.totalPrice)}€
+Total: ${formatPrice(order.priceDetails.totalPrice)}€ (IVA incluido)
 `
     : ''
 }
@@ -791,8 +806,8 @@ Si tienes alguna pregunta o necesitas modificar tu pedido, no dudes en contactar
 - Teléfono: ${translations.footer.contact.phone || 'No especificado'}
   `;
 
-  // Asunto del correo
-  const emailSubject = `Nuevo Pedido de ${order.fullName || 'Cliente'} #${orderNumber}`;
+  // Asunto del correo (formato breve)
+  const emailSubject = `Pedido #${orderNumber} - ${order.fullName || 'Cliente'} - ${order.guests || 'N/A'} pax`;
 
   // Correo para el administrador
   const msgAdmin = {
@@ -800,7 +815,7 @@ Si tienes alguna pregunta o necesitas modificar tu pedido, no dudes en contactar
     from: senderEmail,
     subject: emailSubject,
     text: textContentAdmin,
-    html: htmlContentAdmin,
+    html: htmlContentAdmin
   };
 
   // Correo para el cliente
@@ -809,7 +824,7 @@ Si tienes alguna pregunta o necesitas modificar tu pedido, no dudes en contactar
     from: senderEmail,
     subject: emailSubject,
     text: textContentClient,
-    html: htmlContentClient,
+    html: htmlContentClient
   };
 
   try {
@@ -828,7 +843,7 @@ Si tienes alguna pregunta o necesitas modificar tu pedido, no dudes en contactar
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: 'Formulario enviado exitosamente' }),
+      body: JSON.stringify({ message: 'Formulario enviado exitosamente' })
     };
   } catch (error) {
     console.error('Error enviando los correos:', error);
@@ -837,7 +852,7 @@ Si tienes alguna pregunta o necesitas modificar tu pedido, no dudes en contactar
     }
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Error enviando el formulario', details: error.message }),
+      body: JSON.stringify({ error: 'Error enviando el formulario', details: error.message })
     };
   }
 };
